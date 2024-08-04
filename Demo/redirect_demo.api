@@ -1,0 +1,15 @@
+syntax = "v1"
+
+type Req {
+	ShortUrl string `path:"shortUrl"`
+}
+
+type Resp {
+	LongUrl string `json:"longUrl"`
+}
+
+service shortUrl-api {
+	@handler ShortUrlHandler
+	get /:shortUrl (Req) returns (Resp)
+}
+
