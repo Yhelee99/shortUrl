@@ -2,8 +2,8 @@
 
 ## 架构图
 
-![arch](.\images\arch.png)
+![arch](images\arch.png)
 
 ### 重定向
 
-![redirect](.\images\redirect.png)
+![redirect](images\redirect.png)
