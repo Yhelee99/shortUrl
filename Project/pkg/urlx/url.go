@@ -1,6 +1,7 @@
 package urlx
 
 import (
+	"errors"
 	"net/url"
 	"path"
 )
@@ -11,5 +12,10 @@ func GetBasePath(targetUrl string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	if myUrl.Host == "" {
+		return "", errors.New("no Host in target Url")
+	}
+
 	return path.Base(myUrl.Path), nil
 }
