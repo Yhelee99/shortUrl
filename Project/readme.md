@@ -12,14 +12,35 @@
 
 2. 搭建go-Zero框架的骨架
 
-	2.1 编写api文件
+   2.1 编写api文件
 
-	2.2 根据api文件生成go代码
+   2.2 根据api文件生成go代码
 
 3. 根据数据表生成model层代码
 
-	```bash
-	goctl model mysql datasource -url="user:password@tcp(addr:port)/database" -table="table" -dir="./model"
-	```
+   ```bash
+   goctl model mysql datasource -url="user:password@tcp(addr:port)/database" -table="table" -dir="./model"
+   ```
 
 4. 同步依赖
+5. 配置文件，修改配置结构体和配置文件
+
+#### 参数校验
+
+
+
+1. 下载validator库
+
+   ```bash
+   go get github.com/go-playground/validator/v10
+   ```
+
+2. 导入validator库
+
+   ```go
+   import "github.com/go-playground/validator/v10"
+   ```
+
+   
+
+3. 在api文件中为结构体添加validate tag，并添加校验规则

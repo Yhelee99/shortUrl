@@ -10,6 +10,6 @@ type Config struct {
 	}
 
 	SequenceDb struct {
-		DNS string
+		DSN string
 	}
 }

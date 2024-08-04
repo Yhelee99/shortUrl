@@ -1,12 +1,12 @@
 /*
-  短链接项目
+短链接项目
 */
 syntax = "v1"
 
 // 生成短链接
 type (
 	ConvertReq {
-		LongUrl string `json:"longUrl"`
+		LongUrl string `json:"longUrl" validate:"required,longUrl"`
 	}
 	ConvertResp {
 		ShortUrl string `json:"shortUrl"`
@@ -16,7 +16,7 @@ type (
 // 查看短链接
 type (
 	ShowReq {
-		ShortUrl string `path:"shortUrl"`
+		ShortUrl string `path:"shortUrl validata:required"`
 	}
 	ShowResp {
 		LongUrl string `json:"longUrl"`

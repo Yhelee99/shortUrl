@@ -7,3 +7,7 @@ ShortUrlDb:
 
 SequenceDb:
   DSN: root:root@tcp(47.115.48.13:668)/sequence
+
+Log:
+  Level: debug
+  
