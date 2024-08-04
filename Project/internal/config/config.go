@@ -1,0 +1,15 @@
+package config
+
+import "github.com/zeromicro/go-zero/rest"
+
+type Config struct {
+	rest.RestConf
+
+	ShortUrlDb struct {
+		DSN string
+	}
+
+	SequenceDb struct {
+		DNS string
+	}
+}

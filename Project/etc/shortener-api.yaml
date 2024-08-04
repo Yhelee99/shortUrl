@@ -1,0 +1,9 @@
+Name: shortener-api
+Host: 0.0.0.0
+Port: 8888
+
+ShortUrlDb:
+  DSN: root:root@tcp(47.115.48.13:668)/shortUrl
+
+SequenceDb:
+  DSN: root:root@tcp(47.115.48.13:668)/sequence

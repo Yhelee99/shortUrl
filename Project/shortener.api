@@ -1,0 +1,33 @@
+/*
+  短链接项目
+*/
+syntax = "v1"
+
+// 生成短链接
+type (
+	ConvertReq {
+		LongUrl string `json:"longUrl"`
+	}
+	ConvertResp {
+		ShortUrl string `json:"shortUrl"`
+	}
+)
+
+// 查看短链接
+type (
+	ShowReq {
+		ShortUrl string `path:"shortUrl"`
+	}
+	ShowResp {
+		LongUrl string `json:"longUrl"`
+	}
+)
+
+service shortener-api {
+	@handler ConvertHandler
+	post /convert (ConvertReq) returns (ConvertResp)
+
+	@handler ShowUrlHandler
+	get /show/:shortUrl (ShowReq) returns (ShowResp)
+}
+
