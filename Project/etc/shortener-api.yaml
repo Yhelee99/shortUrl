@@ -3,11 +3,17 @@ Host: 0.0.0.0
 Port: 8888
 
 ShortUrlDb:
-  DSN: root:root@tcp(47.115.48.13:668)/shortUrl
+  DSN: root:root@tcp(47.115.48.13:668)/shortUrl?charset=utf8mb4&parseTime=True
 
 SequenceDb:
-  DSN: root:root@tcp(47.115.48.13:668)/sequence
+  DSN: root:root@tcp(47.115.48.13:668)/sequence?charset=utf8mb4&parseTime=True
 
 Log:
   Level: debug
-  
+  Mode: file
+
+BaseString: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
+
+BlackList: ["api","fuck","version","query","test","convert"]
+
+Domain: yhelee.cn/

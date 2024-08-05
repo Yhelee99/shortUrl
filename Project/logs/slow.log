@@ -1,0 +1,1 @@
+{"@timestamp":"2024-08-05T23:06:01.372+08:00","caller":"handler/loghandler.go:131","content":"[HTTP] 200 - POST /convert - [::1]:5099 - PostmanRuntime/7.40.0 - slowcall(2009.3ms)","duration":"2009.3ms","level":"slow","span":"8bc69c866290aa2e","trace":"a1e04dffef528736d036a0469add63bd"}

@@ -12,4 +12,10 @@ type Config struct {
 	SequenceDb struct {
 		DSN string
 	}
+
+	BaseString string
+
+	BlackList []string
+
+	Domain string
 }

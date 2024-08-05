@@ -1,0 +1,4 @@
+{"@timestamp":"2024-08-05T23:03:09.182+08:00","caller":"sqlx/utils.go:142","content":"Error on getting sql instance of tcp(47.115.48.13:668)/shortUrl&parseTime=true: Error 1049 (42000): Unknown database 'shortUrl&parseTime=true'","level":"error","span":"f8fb849f91ccd6a5","trace":"0f6ef1c2febb804338e5390ab6ab1d65"}
+{"@timestamp":"2024-08-05T23:03:09.182+08:00","caller":"logic/convertLogic.go:53","content":"ShortUrlDb.FindOneByMd5 failed.","err":"Error 1049 (42000): Unknown database 'shortUrl&parseTime=true'","level":"error"}
+{"@timestamp":"2024-08-05T23:06:01.372+08:00","caller":"logic/convertLogic.go:41","content":"CheckUrl failed.","err":null,"level":"error"}
+{"@timestamp":"2024-08-05T23:07:42.985+08:00","caller":"logic/convertLogic.go:41","content":"CheckUrl failed.","err":null,"level":"error"}

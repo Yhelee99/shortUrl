@@ -10,6 +10,7 @@ import (
 	"Project/internal/errorx"
 	"Project/internal/handler"
 	"Project/internal/svc"
+	"Project/pkg/basex"
 
 	"github.com/zeromicro/go-zero/core/conf"
 	"github.com/zeromicro/go-zero/rest"
@@ -23,6 +24,9 @@ func main() {
 
 	var c config.Config
 	conf.MustLoad(*configFile, &c)
+
+	//初始化Basex包
+	basex.MustBaseInit(c.BaseString)
 
 	server := rest.MustNewServer(c.RestConf)
 	defer server.Stop()

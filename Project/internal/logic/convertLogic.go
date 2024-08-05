@@ -7,6 +7,8 @@ import (
 	"Project/internal/errorx"
 	"Project/internal/svc"
 	"Project/internal/types"
+	"Project/model"
+	"Project/pkg/basex"
 	conncheck "Project/pkg/connCheck"
 	"Project/pkg/urlx"
 	"Project/pkg/yhelee"
@@ -34,9 +36,8 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 	// 1.1 判断是否为空
 	//   使用validator包，在进入业务逻辑前完成
 	// 1.2 判断链接是否有效
-	ok := conncheck.CheckUrl(req.LongUrl)
-	logx.Debugw("url检查", logx.Field("长地址", req.LongUrl), logx.Field("结果", ok))
-	if !ok {
+
+	if ok := conncheck.CheckUrl(req.LongUrl); !ok {
 		logx.Errorw("CheckUrl failed.", logx.Field("err", err))
 		return nil, errorx.NewErrCode(errorx.InvalidParams, "长链接无效")
 	}
@@ -60,19 +61,40 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 		return nil, errorx.NewErrCode(errorx.InvalidParams, "请输入长链接")
 	}
 	logx.Debugw("取base地址", logx.Field("值", baseUrl))
-	// 2. 取号
-	num, err := l.svcCtx.Sequence.GetNumb()
-	if err != nil {
-		return nil, errorx.NewDefaultErrCode()
-	}
-	logx.Debugw("取号成功", logx.Field("值", num))
 
-	// 3. 生成短链
-	// 3.1 10进制转62进制
-	// 3.2 预防破解,考虑安全性
-	// 3.3 添加屏蔽词
+	var short string
+	for {
+		// 2. 取号
+		num, err := l.svcCtx.Sequence.GetNumb()
+		if err != nil {
+			return nil, errorx.NewDefaultErrCode()
+		}
+		logx.Debugw("取号成功", logx.Field("值", num))
+
+		// 3. 生成短链
+		// 3.1 10进制转62进制
+		short = basex.IntToString(num)
+		logx.Debugw("10进制转62进制", logx.Field("值", short))
+		// 3.2 预防破解,考虑安全性   ---通过打乱编码表（basestring）实现
+		// 3.3 添加屏蔽词
+		if _, ok := l.svcCtx.BlackList[short]; !ok {
+			break
+		}
+	}
 
 	// 4. 入库
+	_, err = l.svcCtx.ShortUrlDb.Insert(l.ctx, &model.ShortUrlMap{
+		Lurl: sql.NullString{String: req.LongUrl, Valid: true},
+		Md5:  sql.NullString{String: md5v, Valid: true},
+		Surl: sql.NullString{String: short, Valid: true},
+	})
+	if err != nil {
+		logx.Errorw("ShortUrlDb.Insert failed.", logx.Field("err", err))
+		return nil, errorx.NewDefaultErrCode()
+	}
+
 	// 5. 返回响应
-	return
+	shortUrl := l.svcCtx.Config.Domain + short
+
+	return &types.ConvertResp{ShortUrl: shortUrl}, nil
 }
