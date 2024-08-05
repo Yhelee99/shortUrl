@@ -1,6 +1,7 @@
 package svc
 
 import (
+	sequence "Project/Sequence"
 	"Project/internal/config"
 	"Project/model"
 
@@ -10,6 +11,8 @@ import (
 type ServiceContext struct {
 	Config     config.Config
 	ShortUrlDb model.ShortUrlMapModel
+
+	Sequence sequence.Sequence
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -19,5 +22,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config:     c,
 		ShortUrlDb: model.NewShortUrlMapModel(conn),
+		Sequence:   sequence.NewSeqMysql(c.SequenceDb.DSN),
 	}
 }

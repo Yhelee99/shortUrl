@@ -57,11 +57,21 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 	baseUrl, err := urlx.GetBasePath(req.LongUrl)
 	if err != nil {
 		logx.Errorw("urlx.GetBasePath failed", logx.Field("url", req.LongUrl), logx.Field("err", err))
-		return nil, err
+		return nil, errorx.NewErrCode(errorx.InvalidParams, "请输入长链接")
 	}
 	logx.Debugw("取base地址", logx.Field("值", baseUrl))
 	// 2. 取号
+	num, err := l.svcCtx.Sequence.GetNumb()
+	if err != nil {
+		return nil, errorx.NewDefaultErrCode()
+	}
+	logx.Debugw("取号成功", logx.Field("值", num))
+
 	// 3. 生成短链
+	// 3.1 10进制转62进制
+	// 3.2 预防破解,考虑安全性
+	// 3.3 添加屏蔽词
+
 	// 4. 入库
 	// 5. 返回响应
 	return
