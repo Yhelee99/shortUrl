@@ -94,7 +94,9 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 		return nil, errorx.NewDefaultErrCode()
 	}
 	// 4.2 存入布隆过滤器
-	l.svcCtx.Filter.Add([]byte(short))
+	if err := l.svcCtx.Filter.Add([]byte(short)); err != nil {
+		logx.Errorw("BloomFilter.Add() failed", logx.Field("err", err))
+	}
 
 	// 5. 返回响应
 	shortUrl := l.svcCtx.Config.Domain + "/redirect/" + short

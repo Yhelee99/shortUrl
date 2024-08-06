@@ -9,7 +9,7 @@ SequenceDb:
   DSN: root:root@tcp(47.115.48.13:668)/sequence?charset=utf8mb4&parseTime=True
 
 Log:
-  Level: debug
+  Level: info
   Mode: console
 
 BaseString: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ

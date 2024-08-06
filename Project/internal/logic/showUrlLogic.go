@@ -29,7 +29,11 @@ func NewShowUrlLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ShowUrlLo
 
 func (l *ShowUrlLogic) ShowUrl(req *types.ShowReq) (resp *types.ShowResp, err error) {
 
-	//使用布隆过滤器
+	//使用布隆过滤器(分为两种)
+	// 1. 基于内存版本，缺点：服务重启后过滤器里的数据就没了，启动时需要重新加载
+	// 2. 基于redis版本，使用gozero自带的bloom
+
+	// 此处使用基于redis版本
 	exists, err := l.svcCtx.Filter.Exists([]byte(req.ShortUrl))
 	if err != nil {
 		logx.Errorw("Filter.Exists failed.", logx.Field("err", err))
