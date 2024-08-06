@@ -10,10 +10,13 @@ SequenceDb:
 
 Log:
   Level: debug
-  Mode: file
+  Mode: console
 
 BaseString: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 
 BlackList: ["api","fuck","version","query","test","convert"]
 
 Domain: localhost:8888
+
+CacheRedis:
+  - Host: 47.115.48.13:700
