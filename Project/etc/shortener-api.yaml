@@ -16,4 +16,4 @@ BaseString: 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ
 
 BlackList: ["api","fuck","version","query","test","convert"]
 
-Domain: yhelee.cn/
+Domain: localhost:8888

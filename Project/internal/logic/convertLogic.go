@@ -95,7 +95,7 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 	}
 
 	// 5. 返回响应
-	shortUrl := l.svcCtx.Config.Domain + short
+	shortUrl := l.svcCtx.Config.Domain + "/redirect/" + short
 
 	return &types.ConvertResp{ShortUrl: shortUrl}, nil
 }
