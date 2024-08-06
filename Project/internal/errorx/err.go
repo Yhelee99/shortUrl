@@ -3,6 +3,7 @@ package errorx
 const (
 	defaultErrorCode = 10001
 	InvalidParams    = 10002 //参数不正确
+	NotFound         = 10003
 
 	defaultMessage = "服务繁忙"
 )

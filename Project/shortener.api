@@ -16,7 +16,7 @@ type (
 // 查看短链接
 type (
 	ShowReq {
-		ShortUrl string `path:"shortUrl validata:required"`
+		ShortUrl string `path:"shortUrl" validate:"required,shortUrl"`
 	}
 	ShowResp {
 		LongUrl string `json:"longUrl"`

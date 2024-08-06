@@ -1,10 +1,13 @@
 package logic
 
 import (
-	"context"
-
+	"Project/internal/errorx"
 	"Project/internal/svc"
 	"Project/internal/types"
+	"context"
+	"database/sql"
+	"errors"
+	"github.com/zeromicro/go-zero/core/stores/sqlx"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +27,22 @@ func NewShowUrlLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ShowUrlLo
 }
 
 func (l *ShowUrlLogic) ShowUrl(req *types.ShowReq) (resp *types.ShowResp, err error) {
-	// todo: add your logic here and delete this line
+	// 根据长链查短链
+	reslut, err := l.svcCtx.ShortUrlDb.FindOneBySurl(l.ctx, sql.NullString{
+		String: req.ShortUrl,
+		Valid:  true,
+	})
 
-	return
+	if err != nil {
+		if errors.Is(err, sqlx.ErrNotFound) {
+			return nil, errorx.NewErrCode(errorx.NotFound, "未找到该短链")
+		}
+		logx.Errorw("ShortUrlDb.FindOneBySurl failed.", logx.Field("err", err))
+		return nil, errorx.NewDefaultErrCode()
+	}
+
+	lUrl := reslut.Lurl
+	return &types.ShowResp{
+		LongUrl: lUrl.String,
+	}, nil
 }

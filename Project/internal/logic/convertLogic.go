@@ -3,6 +3,7 @@ package logic
 import (
 	"context"
 	"database/sql"
+	"errors"
 
 	"Project/internal/errorx"
 	"Project/internal/svc"
@@ -46,7 +47,7 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 	md5v := yhelee.GetMd5Value([]byte(req.LongUrl)) // []byte()是一个函数调用的形式,可以传string
 	// 1.3.2 查询md5值判重
 	reslut, err := l.svcCtx.ShortUrlDb.FindOneByMd5(l.ctx, sql.NullString{String: md5v, Valid: true}) // Valid = true 表示值有效
-	if err != sqlx.ErrNotFound {
+	if !errors.Is(err, sqlx.ErrNotFound) {
 		if err == nil {
 			return &types.ConvertResp{ShortUrl: reslut.Surl.String}, errorx.NewErrCode(errorx.InvalidParams, "此链接已转链过")
 		} else {
