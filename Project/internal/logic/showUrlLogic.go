@@ -7,6 +7,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 
 	"github.com/zeromicro/go-zero/core/logx"
@@ -27,6 +28,18 @@ func NewShowUrlLogic(ctx context.Context, svcCtx *svc.ServiceContext) *ShowUrlLo
 }
 
 func (l *ShowUrlLogic) ShowUrl(req *types.ShowReq) (resp *types.ShowResp, err error) {
+
+	//使用布隆过滤器
+	exists, err := l.svcCtx.Filter.Exists([]byte(req.ShortUrl))
+	if err != nil {
+		logx.Errorw("Filter.Exists failed.", logx.Field("err", err))
+	}
+	if !exists {
+		return nil, errorx.NewErrCode(errorx.NotFound, "未找到该短链")
+	}
+
+	logx.Debug("开始查询缓存和DB...")
+
 	// 根据长链查短链
 	reslut, err := l.svcCtx.ShortUrlDb.FindOneBySurl(l.ctx, sql.NullString{
 		String: req.ShortUrl,

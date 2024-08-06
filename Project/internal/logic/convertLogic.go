@@ -83,7 +83,7 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 		}
 	}
 
-	// 4. 入库
+	// 4.1 入库
 	_, err = l.svcCtx.ShortUrlDb.Insert(l.ctx, &model.ShortUrlMap{
 		Lurl: sql.NullString{String: req.LongUrl, Valid: true},
 		Md5:  sql.NullString{String: md5v, Valid: true},
@@ -93,6 +93,8 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 		logx.Errorw("ShortUrlDb.Insert failed.", logx.Field("err", err))
 		return nil, errorx.NewDefaultErrCode()
 	}
+	// 4.2 存入布隆过滤器
+	l.svcCtx.Filter.Add([]byte(short))
 
 	// 5. 返回响应
 	shortUrl := l.svcCtx.Config.Domain + "/redirect/" + short

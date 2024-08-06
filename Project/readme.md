@@ -26,9 +26,9 @@
 
 5. 配置文件，修改配置结构体和配置文件
 
-### 开发
+## 开发
 
-#### 参数校验
+#### 1. 参数校验
 
 1. 下载validator库
 
@@ -48,17 +48,17 @@
 
    
 
-#### 取号器
+#### 2. 取号器
 
 使用mysql的replace命令生成取号器
 
 单独建表，一直执行replace into，执行后获取最后一次插入的id即得到号码num
 
-#### 生成短链
+#### 3. 生成短链
 
 使用取号器生成的num，转换为base62进制，即得到短链接，拼接上域名返回
 
-#### 查看短链
+#### 4. 查看短链
 
 #####   带缓存版本
 
@@ -83,6 +83,33 @@
   3.   如何解决缓存穿透问题？
 
        1. 布隆过滤器
+       
+          - 布隆过滤器优点    
+       
+            节省空间，并不存储原始数据，只用来判断某个元素是否存在
+       
+          - 原理
+       
+            - 介绍：[布隆过滤器(Bloom Filter)的原理和实现 - cpselvis - 博客园 (cnblogs.com)](https://www.cnblogs.com/cpselvis/p/6265825.html)
+            - 在线可视化：[Bloom Filters (jasondavies.com)](https://www.jasondavies.com/bloomfilter/)
+       
+          - 实现
+       
+            - Go库：github.com/bits-and-blooms/bloom/v3
+            - go-zero bloom：
+       
+          - 布隆过滤器变种
+       
+            1. 计数版布隆过滤器
+            2.  ....
+       
+          - 应用
+       
+            - 防止内存穿透
+            - 推荐系统去重
+            - 黑白名单
+            - 垃圾邮件过滤
+       
        2. 布谷鸟过滤器
 
 ```tiki wiki
