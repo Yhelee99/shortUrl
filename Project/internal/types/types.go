@@ -9,6 +9,14 @@ type ConvertResp struct {
 	ShortUrl string `json:"shortUrl"`
 }
 
+type RedirectReq struct {
+	RedReq string `path:"redirectReq" validata:"required,shortUrl"`
+}
+
+type RedirectResp struct {
+	RedResp string
+}
+
 type ShowReq struct {
 	ShortUrl string `path:"shortUrl" validate:"required,shortUrl"`
 }

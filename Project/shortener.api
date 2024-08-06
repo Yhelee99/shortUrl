@@ -23,11 +23,24 @@ type (
 	}
 )
 
+// 跳转
+type (
+	RedirectReq {
+		RedReq string `path:"redirectReq" validata:"required,shortUrl"`
+	}
+	RedirectResp {
+		RedResp string
+	}
+)
+
 service shortener-api {
 	@handler ConvertHandler
 	post /convert (ConvertReq) returns (ConvertResp)
 
 	@handler ShowUrlHandler
 	get /show/:shortUrl (ShowReq) returns (ShowResp)
+
+	@handler RedirectHandler
+	get /redirect/:redirectReq (RedirectReq) returns (RedirectResp)
 }
 
