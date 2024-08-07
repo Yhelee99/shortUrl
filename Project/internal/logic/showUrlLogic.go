@@ -45,6 +45,7 @@ func (l *ShowUrlLogic) ShowUrl(req *types.ShowReq) (resp *types.ShowResp, err er
 	logx.Debug("开始查询缓存和DB...")
 
 	// 根据长链查短链
+	// go-zero 原生支持Singleflight
 	reslut, err := l.svcCtx.ShortUrlDb.FindOneBySurl(l.ctx, sql.NullString{
 		String: req.ShortUrl,
 		Valid:  true,

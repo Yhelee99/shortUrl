@@ -128,3 +128,22 @@ ps:
 ​	缓存雪崩是指缓存中数据大批量到过期时间，而查询数据量巨大，引起数据库压力过大甚至down机。和缓存击穿不同的是，缓存击穿指并发查同一条数据，缓存雪崩是不同数据都过期了，很多数据都查不到从而查数据库。
 ```
 
+
+
+
+
+![image-20240807091601475](C:\Users\yhele\AppData\Roaming\Typora\typora-user-images\image-20240807091601475.png)
+
+
+
+
+
+## 简历
+
+- 参考链接
+
+​	[如何打造一份优雅的简历？ - Stefno - 博客园 (cnblogs.com)](https://www.cnblogs.com/qcrao-2018/p/11150411.html)
+
+#### 1. 拓展问题
+
+​	1. 常见的http状态码： [HTTP 响应状态码 - HTTP | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)

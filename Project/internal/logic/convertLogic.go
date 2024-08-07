@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"fmt"
 
 	"Project/internal/errorx"
 	"Project/internal/svc"
@@ -49,7 +50,7 @@ func (l *ConvertLogic) Convert(req *types.ConvertReq) (resp *types.ConvertResp, 
 	reslut, err := l.svcCtx.ShortUrlDb.FindOneByMd5(l.ctx, sql.NullString{String: md5v, Valid: true}) // Valid = true 表示值有效
 	if !errors.Is(err, sqlx.ErrNotFound) {
 		if err == nil {
-			return &types.ConvertResp{ShortUrl: reslut.Surl.String}, errorx.NewErrCode(errorx.InvalidParams, "此链接已转链过")
+			return nil, errorx.NewErrCode(errorx.InvalidParams, fmt.Sprintf("此链接已被转链为：%v", l.svcCtx.Config.Domain+"/redirect/"+reslut.Surl.String))
 		} else {
 			logx.Errorw("ShortUrlDb.FindOneByMd5 failed.", logx.Field("err", err))
 			return nil, errorx.NewDefaultErrCode()
