@@ -146,4 +146,5 @@ ps:
 
 #### 1. 拓展问题
 
-​	1. 常见的http状态码： [HTTP 响应状态码 - HTTP | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)
+	1. 常见的http状态码： [HTTP 响应状态码 - HTTP | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Status)
+	1. 分别介绍303和307：[http 状态码301、302、303、307、308 的区别 - 简书 (jianshu.com)](https://www.jianshu.com/p/70062192f26b)
