@@ -3,10 +3,10 @@ Host: 0.0.0.0
 Port: 8888
 
 ShortUrlDb:
-  DSN: root:root@tcp(47.115.48.13:668)/shortUrl?charset=utf8mb4&parseTime=True
+  DSN: root:root@tcp(localhost:3306)/dbname?charset=utf8mb4&parseTime=True
 
 SequenceDb:
-  DSN: root:root@tcp(47.115.48.13:668)/sequence?charset=utf8mb4&parseTime=True
+  DSN: root:root@tcp(localhost:668)/dbname?charset=utf8mb4&parseTime=True
 
 Log:
   Level: info
@@ -19,4 +19,4 @@ BlackList: ["api","fuck","version","query","test","convert"]
 Domain: localhost:8888
 
 CacheRedis:
-  - Host: 47.115.48.13:700
+  - Host: localhost:6379
