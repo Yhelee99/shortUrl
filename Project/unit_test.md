@@ -8,11 +8,11 @@ go install -v github.com/cweill/gotests/gotests@latest
 
 * 安装gotests后，在vscode中选中函数，右键即可生成对应函数的单元测试
 
-<img src="image-20240804220124036.png" alt="image-20240804220124036" style="zoom:67%;" />
+![image-20240804220124036.png](./images/image-20240804220124036.png)
 
 * 语法简单，填写用例即可
 
-  <img src="image-20240804220326819.png" alt="image-20240804220326819" style="zoom: 67%;" />
+![image-20240804220326819.png](./images/image-20240804220326819.png)
 
 
 
@@ -24,7 +24,7 @@ go install github.com/smartystreets/goconvey@latest
 
 * 导入convey包编写单元测试，优点：多用例时结构清晰
 
-  ![image-20240804220500177](image-20240804220500177.png)
+  ![image-20240804220500177](./images/image-20240804220500177.png)
 
 
 

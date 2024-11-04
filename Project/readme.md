@@ -1,6 +1,6 @@
 # 项目架构图
 
-![架构图](架构图.png)
+![架构图](./images/架构图.png)
 
 ## 搭建项目骨架
 
@@ -132,7 +132,7 @@ ps:
 
 
 
-![image-20240807091601475](C:\Users\yhele\AppData\Roaming\Typora\typora-user-images\image-20240807091601475.png)
+![image-20240807091601475](./images/image-20240807091601475.png)
 
 
 
